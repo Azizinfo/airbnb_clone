@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 import { RentalList } from './RentalList';
 import * as actions from 'actions';
 
-
 class RentalListing extends React.Component {  
  
-  componentWillMount(){
+  componentWillMount(){ 
     this.props.dispatch(actions.fetchRentals());
   }
     render(){
