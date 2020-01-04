@@ -1,7 +1,15 @@
 @import 'variables.scss';
 @import 'header/header.scss';
+@import 'form/form.scss';
+
 @import 'rental/rental_listing.scss';
 @import 'rental/rental_detail.scss';
+
+.clickable{
+  &:hover {
+    cursor: pointer;
+  }
+}
 
 .page-title {
     font-size : 30px;
@@ -19,4 +27,18 @@
   
   .house {
     color: #bf1818;
+  }
+
+
+  .btn-bwm {
+    background-color: $main-color;
+    border-color: $main-color;
+    color: white;
+    padding: 15px 30px;
+    font-size: 20px;
+  
+    &:hover, &:focus, &:active {
+      border-color: $main-color !important;
+      background-color: $main-color !important;
+    }
   }
