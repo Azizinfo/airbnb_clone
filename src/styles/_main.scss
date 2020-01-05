@@ -5,6 +5,8 @@
 @import 'rental/rental_listing.scss';
 @import 'rental/rental_detail.scss';
 
+@import 'booking/booking.scss';
+
 .clickable{
   &:hover {
     cursor: pointer;
