@@ -35,5 +35,15 @@
     .nav-item {
       color: $main-white-color;
     }
+
+    .dropdown-menu {
+      .dropdown-item {
+        font-size: 14px;
+  
+        &:active {
+          background-color: $main-color;
+        }
+      }
+    }
   }
   
