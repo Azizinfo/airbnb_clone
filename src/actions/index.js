@@ -6,17 +6,40 @@ import { FETCH_RENTAL_BY_ID_SUCCESS,
          FETCH_RENTALS_SUCCESS,         
          FETCH_RENTALS_FAIL,
          FETCH_RENTALS_INIT,
+         UPDATE_RENTAL_SUCCESS,
+         UPDATE_RENTAL_FAIL,
+         RESET_RENTAL_ERRORS,
          FETCH_USER_BOOKINGS_INIT,
          FETCH_USER_BOOKINGS_SUCCESS,
          FETCH_USER_BOOKINGS_FAIL,
+         RELOAD_MAP_FINISH,
+         RELOAD_MAP,
          LOGIN_SUCCESS,
          LOGIN_FAILURE,
          LOGOUT
          } from './types';
 
+const axiosInstance = axiosService.initInstance();
+
+export const verifyRentalOwner = (rentalId) => {
+  return axiosInstance.get(`/rentals/${rentalId}/verify-user`);
+}
+
+export const reloadMap = () => {
+  return {
+    type: RELOAD_MAP
+  }
+}
+
+export const reloadMapFinish = () => {
+  return {
+    type: RELOAD_MAP_FINISH
+  }
+}
+               
+
 //RENTALS AUTH         
 
-const axiosInstance = axiosService.initInstance();
 const fetchRentalByIdInit = () =>{
   return {
     type : FETCH_RENTAL_BY_ID_INIT    
@@ -72,6 +95,38 @@ export const createRental = (rentalData) =>{
      err => Promise.reject(err.response.data.errors)    
    )
  }
+
+ export const resetRentalErrors = () => {
+  return {
+    type: RESET_RENTAL_ERRORS
+  }
+}
+
+ const updateRentalSuccess = (updatedRental) => {
+  return {
+    type: UPDATE_RENTAL_SUCCESS,
+    rental: updatedRental
+  }
+}
+
+const updateRentalFail = (errors) => {
+  return {
+    type: UPDATE_RENTAL_FAIL,
+    errors
+  }
+}
+
+export const updateRental = (id, rentalData) => dispatch => {
+  return axiosInstance.patch(`/rentals/${id}`, rentalData)
+    .then(res => res.data)
+    .then(updatedRental => {
+      dispatch(updateRentalSuccess(updatedRental));
+      if (rentalData.city || rentalData.street) {
+        dispatch(reloadMap());
+      }     
+    })
+    .catch(({response}) => dispatch(updateRentalFail(response.data.errors)))
+}
 
 //USER BOOKINGS ACTIONS 
 const fetchUserBookingsInit = () =>{

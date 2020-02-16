@@ -2,6 +2,7 @@ import thunk from 'redux-thunk';
 import { rentalReducer ,selectedRentalReducer } from './rental-reducer';
 import { authReducer } from './auth-reducer';
 import { userBookingsReducer } from './booking-reducer';
+import { rentalMapReducer } from './map-reducer';
 import { createStore, applyMiddleware, compose ,combineReducers} from 'redux';
 import { reducer as formReducer } from 'redux-form';
 
@@ -11,7 +12,8 @@ export const init = () =>{
         rental : selectedRentalReducer,
         form : formReducer,
         auth : authReducer,
-        userBookings : userBookingsReducer
+        userBookings : userBookingsReducer,
+        map: rentalMapReducer
     })
     
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
