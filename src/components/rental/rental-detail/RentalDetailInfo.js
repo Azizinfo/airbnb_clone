@@ -12,6 +12,7 @@ export function RentalDetailInfo({rental}) {
       </div>    
       <h1 className="rental-title">{rental.title}</h1>
       <h2 className="rental-city">{toUpperCase(rental.city)}</h2>
+      <h2 className="rental-street">{toUpperCase(rental.street)}</h2>
       <div className="rental-room-info">
         <span><i className="fa fa-building"></i>{rental.bedrooms} bedrooms</span>
         <span><i className="fa fa-user"></i> {rental.bedrooms + 4} guests</span>
